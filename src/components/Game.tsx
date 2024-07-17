@@ -5,10 +5,14 @@ import Card from "./Card";
 import Modal from "./Modal";
 import Timer from "./Timer";
 
-const GameBoard = () => {
-  const numberOfCards = 8;
+type GameProps = {
+  numberOfCards: number;
+  cardFlipDuration: number;
+  secondsToCompletion: number;
+};
+
+const Game = ({ numberOfCards, cardFlipDuration, secondsToCompletion }: GameProps) => {
   const pickedImages = images(numberOfCards / 2);
-  const cardFlipDuration = 400;
   const [cards, setCards] = useState<string[]>([
     ...pickedImages,
     ...pickedImages,
@@ -16,7 +20,7 @@ const GameBoard = () => {
   const [flippedIndices, setFlippedIndices] = useState<number[]>([]);
   const [matchedIndices, setMatchedIndices] = useState<number[]>([]);
   const [score, setScore] = useState(0);
-  const [time, setTimeleft] = useState(20);
+  const [time, setTimeleft] = useState(secondsToCompletion);
   const [isGameFinished, setIsGameFinished] = useState(false);
 
   useEffect(() => {
@@ -78,4 +82,4 @@ const GameBoard = () => {
   );
 };
 
-export default GameBoard;
+export default Game;

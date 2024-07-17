@@ -1,5 +1,5 @@
 import { useState } from "react";
-import GameBoard from "./components/GameBoard";
+import Game from "./components/Game";
 import SplashScreen from "./components/SplashScreen";
 
 const App = () => {
@@ -14,7 +14,7 @@ const App = () => {
         {!gameStarted ? (
           <SplashScreen onStartGame={handleStartGame} />
         ) : (
-          <GameBoard />
+          <Game numberOfCards={8} cardFlipDuration={400} secondsToCompletion={20} />
         )}
     </div>
   );
