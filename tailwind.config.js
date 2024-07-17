@@ -10,6 +10,9 @@ export default {
       aspectRatio: {
         golden: "1.586 / 1",
       },
+      borderRadius: {
+        ray: "80% 80% 0 0",
+      },
       boxShadow: {
         card: "0 1px 5px #00000099",
         "card-hover": "0 5px 20px 5px #00000044",
@@ -23,9 +26,14 @@ export default {
           "0%, 100%": { transform: "rotate(-3deg)" },
           "50%": { transform: "rotate(3deg)" },
         },
+        ray: {
+          "0%": { transform: "rotate(0deg)" },
+          "100%": { transform: "rotate(360deg)" },
+        },
       },
       animation: {
         wiggle: "wiggle 1s ease-in-out infinite",
+        ray: "ray 60s linear infinite",
       },
     },
   },

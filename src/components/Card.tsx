@@ -56,7 +56,7 @@ const Card = ({
       currentGlowRef.style.backgroundImage = "";
       currentCard.removeEventListener("mousemove", rotateToMouse);
     });
-  }, [bounds, cardRef, glowRef]);
+  }, [bounds, cardRef, glowRef, isFlipped]);
 
   const handleCardClick = () => {
     handleClick(index);
