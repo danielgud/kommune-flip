@@ -6,23 +6,25 @@ import Modal from "./Modal";
 import Timer from "./Timer";
 
 const GameBoard = () => {
+  const numberOfCards = 8;
+  const pickedImages = images(numberOfCards / 2);
   const cardFlipDuration = 400;
-  const [cards, setCards] = useState<string[]>([]);
+  const [cards, setCards] = useState<string[]>([
+    ...pickedImages,
+    ...pickedImages,
+  ]);
   const [flippedIndices, setFlippedIndices] = useState<number[]>([]);
   const [matchedIndices, setMatchedIndices] = useState<number[]>([]);
   const [score, setScore] = useState(0);
   const [time, setTimeleft] = useState(20);
-
   const [isGameFinished, setIsGameFinished] = useState(false);
 
   useEffect(() => {
-    const cardImages = [...images, ...images];
-    shuffleArray(cardImages);
-    setCards(cardImages);
-  }, []);
+    shuffleArray(cards);
+    setCards(cards);
+  }, [cards]);
 
   const handleCardClick = (index: number) => {
-    // console.log({index, flippedIndices, matchedIndices})
     if (flippedIndices.length === 2 || flippedIndices.includes(index)) return;
 
     const newFlippedIndices = [...flippedIndices, index];
@@ -66,6 +68,7 @@ const GameBoard = () => {
             isFlipped={
               flippedIndices.includes(index) || matchedIndices.includes(index)
             }
+            cardFlipDuration={cardFlipDuration}
             handleClick={handleCardClick}
           />
         ))}
