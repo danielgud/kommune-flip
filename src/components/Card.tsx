@@ -5,17 +5,24 @@ interface CardProps {
   index: number;
   image: string;
   isFlipped: boolean;
+  cardFlipDuration: number;
   handleClick: (index: number) => void;
 }
 
-const Card = ({ index, image, isFlipped, handleClick }: CardProps) => {
+const Card = ({
+  index,
+  image,
+  isFlipped,
+  handleClick,
+  cardFlipDuration,
+}: CardProps) => {
   const cardRef = createRef<HTMLDivElement>();
-  const lightningRef = createRef<HTMLDivElement>();
+  const glowRef = createRef<HTMLDivElement>();
   const [bounds, setBounds] = useState<DOMRect>();
 
   useEffect(() => {
     const currentCard = cardRef.current!;
-    const currentLightningRef = lightningRef.current!;
+    const currentGlowRef = glowRef.current!;
     const rotateToMouse = (event: MouseEvent) => {
       if (!bounds) return;
 
@@ -27,7 +34,7 @@ const Card = ({ index, image, isFlipped, handleClick }: CardProps) => {
         x: leftX - bounds.width / 2,
         y: topY - bounds.height / 2,
       };
-      currentLightningRef.style.backgroundImage = `
+      currentGlowRef.style.backgroundImage = `
         radial-gradient(
           circle at
           ${center.x * 2 + bounds.width / 2}px
@@ -46,10 +53,10 @@ const Card = ({ index, image, isFlipped, handleClick }: CardProps) => {
     currentCard.addEventListener("mouseleave", () => {
       currentCard.style.transform = "none";
       currentCard.style.background = "none";
-      currentLightningRef.style.backgroundImage = "";
+      currentGlowRef.style.backgroundImage = "";
       currentCard.removeEventListener("mousemove", rotateToMouse);
     });
-  }, [bounds, cardRef, lightningRef]);
+  }, [bounds, cardRef, glowRef]);
 
   const handleCardClick = () => {
     handleClick(index);
@@ -70,18 +77,22 @@ const Card = ({ index, image, isFlipped, handleClick }: CardProps) => {
       <div
         style={{ transformStyle: "preserve-3d" }}
         className={classNames(
-          "absolute inset-0 transition-transform duration-500",
+          `absolute inset-0 transition-transform duration-${cardFlipDuration}`,
           {
             "transform rotate-y-180": isFlipped,
           }
         )}
       >
         {/* Back of card */}
-        <div className={classNames("absolute w-full h-full flex justify-center content-center bg-gray-600 rounded-lg")}>
+        <div
+          className={classNames(
+            "absolute w-full h-full flex justify-center content-center bg-gray-600 rounded-lg"
+          )}
+        >
           <img
             src={image}
             alt=""
-            className="w-50 h-50 p-8 mx-auto my-0 backface-hidden"
+            className="w-50 h-50 p-10 mx-auto my-0 backface-hidden"
           />
         </div>
 
@@ -92,7 +103,7 @@ const Card = ({ index, image, isFlipped, handleClick }: CardProps) => {
           )}
         >
           <div
-            ref={lightningRef}
+            ref={glowRef}
             className="absolute w-full h-full left-0 top-0 bg-custom-radial"
           ></div>
           <img

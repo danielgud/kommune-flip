@@ -3,8 +3,10 @@ import { images } from "../assets/images";
 import { shuffleArray } from "../utils/utils";
 import Card from "./Card";
 import Modal from "./Modal";
+import Timer from "./Timer";
 
 const GameBoard = () => {
+  const cardFlipDuration = 400;
   const [cards, setCards] = useState<string[]>([]);
   const [flippedIndices, setFlippedIndices] = useState<number[]>([]);
   const [matchedIndices, setMatchedIndices] = useState<number[]>([]);
@@ -33,7 +35,7 @@ const GameBoard = () => {
         setScore(score + 1);
         setFlippedIndices([]);
       } else {
-        setTimeout(() => setFlippedIndices([]), 1000);
+        setTimeout(() => setFlippedIndices([]), cardFlipDuration * 2);
       }
     }
   };
@@ -50,12 +52,12 @@ const GameBoard = () => {
 
   return (
     <>
-      {/* <Timer
+      <Timer
         timeLeft={time}
         setTimeleft={setTimeleft}
         isGameFinished={isGameFinished}
-      /> */}
-      <div className="grid grid-cols-4 gap-2 w-full h-full p-4 pt-6">
+      />
+      <div className="grid gap-4 grid-cols-4 w-full h-full p-4 pt-6">
         {cards.map((card, index) => (
           <Card
             key={index}

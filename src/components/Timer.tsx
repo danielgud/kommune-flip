@@ -21,7 +21,7 @@ const Timer = ({
 
   return (
     <div
-      className="transition-all ease-in-out duration-1000 fixed top-0 left-0 flex flex-col justify-center overflow-hidden bg-blue-600 dark:bg-blue-500"
+      className="transition-all ease-in-out duration-1000 fixed top-0 left-0 flex flex-col justify-center overflow-hidden bg-green-600"
       style={{ width: `${percentageLeft}%` }}
     >&nbsp;</div>
   );
