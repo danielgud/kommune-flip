@@ -7,7 +7,7 @@ interface ModalProps {
 const Modal = ({ score, time }: ModalProps) => {
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-      <div className="bg-white p-8 rounded shadow-lg text-center">
+      <div className="bg-white p-8 rounded-xl shadow-lg text-center">
         <h2 className="text-2xl font-bold mb-4">Game Over!</h2>
         <p className="mb-2">Your score: {score}</p>
         <p className="mb-4">Time: {time} seconds</p>

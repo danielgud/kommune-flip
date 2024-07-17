@@ -46,6 +46,10 @@ const Game = ({ numberOfCards, cardFlipDuration, secondsToCompletion }: GameProp
     }
   };
 
+  const handleTimerExpired = () => {
+    setIsGameFinished(true);
+  }
+
   useEffect(() => {
     if (
       matchedIndices.length > 0 &&
@@ -61,9 +65,9 @@ const Game = ({ numberOfCards, cardFlipDuration, secondsToCompletion }: GameProp
       <Timer
         timeLeft={time}
         setTimeleft={setTimeleft}
-        isGameFinished={isGameFinished}
+        handleTimerExpired={handleTimerExpired}
       />
-      <div className="grid gap-4 grid-cols-4 w-full h-full p-4 pt-6">
+      <div className="grid gap-4 grid-cols-4 w-full h-full p-4 pt-8">
         {cards.map((card, index) => (
           <Card
             key={index}

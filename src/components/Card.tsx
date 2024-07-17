@@ -24,7 +24,7 @@ const Card = ({
     const currentCard = cardRef.current!;
     const currentGlowRef = glowRef.current!;
     const rotateToMouse = (event: MouseEvent) => {
-      if (!bounds) return;
+      if (!bounds || isFlipped) return;
 
       const mouseX = event.clientX;
       const mouseY = event.clientY;
@@ -66,7 +66,7 @@ const Card = ({
     <div
       ref={cardRef}
       className={classNames(
-        "relative cursor-pointer select-none duration-[150ms] shadow-card hover:shadow-card-hover transition-transform-shadow rounded-lg",
+        "relative cursor-pointer select-none duration-[150ms] shadow-card hover:shadow-card-hover transition-transform-shadow rounded-xl",
         {
           "pointer-events-none": isFlipped,
         }
@@ -86,7 +86,7 @@ const Card = ({
         {/* Back of card */}
         <div
           className={classNames(
-            "absolute w-full h-full flex justify-center content-center bg-gray-600 rounded-lg"
+            "absolute w-full h-full flex justify-center content-center bg-white rounded-xl"
           )}
         >
           <img
@@ -99,7 +99,7 @@ const Card = ({
         {/* Front of card */}
         <div
           className={classNames(
-            "absolute inset-0 bg-gray-800 backface-hidden flex items-center justify-center rounded-lg"
+            "absolute inset-0 bg-blue-900 backface-hidden flex items-center justify-center rounded-xl border-2 border-solid border-white"
           )}
         >
           <div
