@@ -17,7 +17,7 @@ const Card = ({
   handleClick,
   cardFlipDuration,
 }: CardProps) => {
-  const cardRef = createRef<HTMLDivElement>();
+  const cardRef = createRef<HTMLButtonElement>();
   const glowRef = createRef<HTMLDivElement>();
   const [bounds, setBounds] = useState<DOMRect>();
 
@@ -64,17 +64,16 @@ const Card = ({
   };
 
   return (
-    <div
+    <button
       ref={cardRef}
       className={classNames(
-        "relative cursor-pointer select-none duration-[150ms] shadow-card hover:shadow-card-hover transition-transform-shadow rounded-xl overflow-hidden",
+        "relative cursor-pointer select-none duration-[150ms] shadow-card hover:shadow-card-hover transition-transform-shadow rounded-xl overflow-hidden focus-visible:ring-8 ring-focus ring-offset-2 w-full h-full",
         {
           "pointer-events-none": isFlipped,
         }
       )}
       onClick={handleCardClick}
     >
-      {/* Card content */}
       <div
         style={{ transformStyle: "preserve-3d" }}
         className={classNames(
@@ -86,6 +85,7 @@ const Card = ({
       >
         {/* Back of card with kommunelogo */}
         <div
+          role="status"
           className={classNames(
             "absolute w-full h-full flex justify-center content-center bg-white rounded-xl transform rotate-y-180 flex-col"
           )}
@@ -95,7 +95,7 @@ const Card = ({
             alt=""
             className="w-50 h-auto p-2 mx-auto my-0 backface-hidden"
           />
-          <h2 className="text-2xl font-semibold text-center">{kommune.navn}</h2>
+          <h2 className="text-2xl font-semibold text-center" aria-hidden={!isFlipped}>{kommune.navn}</h2>
         </div>
 
         {/* Front of card */}
@@ -109,14 +109,12 @@ const Card = ({
             className="absolute w-full h-full left-0 top-0 bg-custom-radial"
           ></div>
 
-          <img
-            src="/ks-logo-negative.png"
-            alt="ks-logo"
-            className="w-20 h-20"
-          />
+          <h2 className="sr-only" aria-hidden={isFlipped}>Flipp kortet</h2>
+
+          <img src="/ks-logo-negative.png" alt="" className="w-20 h-20" />
         </div>
       </div>
-    </div>
+    </button>
   );
 };
 

@@ -12,7 +12,11 @@ type GameProps = {
   secondsToCompletion: number;
 };
 
-const Game = ({ numberOfCards, cardFlipDuration, secondsToCompletion }: GameProps) => {
+const Game = ({
+  numberOfCards,
+  cardFlipDuration,
+  secondsToCompletion,
+}: GameProps) => {
   const pickedKommuner = kommuner(numberOfCards / 2);
   const [cards, setCards] = useState<Kommune[]>([
     ...pickedKommuner,
@@ -27,7 +31,6 @@ const Game = ({ numberOfCards, cardFlipDuration, secondsToCompletion }: GameProp
   useEffect(() => {
     shuffleArray(cards);
     setCards(cards);
-  
   }, [cards]);
 
   const handleCardClick = (index: number) => {
@@ -50,7 +53,7 @@ const Game = ({ numberOfCards, cardFlipDuration, secondsToCompletion }: GameProp
 
   const handleTimerExpired = () => {
     setIsGameFinished(true);
-  }
+  };
 
   useEffect(() => {
     if (
@@ -69,20 +72,21 @@ const Game = ({ numberOfCards, cardFlipDuration, secondsToCompletion }: GameProp
         setTimeleft={setTimeleft}
         handleTimerExpired={handleTimerExpired}
       /> */}
-      <div className="grid gap-4 grid-cols-4 w-full h-full p-4 pt-8">
+      <ul className="grid gap-4 grid-cols-4 w-full h-full p-4 pt-8">
         {cards.map((card, index) => (
-          <Card
-            key={index}
-            index={index}
-            kommune={card}
-            isFlipped={
-              flippedIndices.includes(index) || matchedIndices.includes(index)
-            }
-            cardFlipDuration={cardFlipDuration}
-            handleClick={handleCardClick}
-          />
+          <li key={index}>
+            <Card
+              index={index}
+              kommune={card}
+              isFlipped={
+                flippedIndices.includes(index) || matchedIndices.includes(index)
+              }
+              cardFlipDuration={cardFlipDuration}
+              handleClick={handleCardClick}
+            />
+          </li>
         ))}
-      </div>
+      </ul>
       {isGameFinished && <Modal score={score} time={time} />}
     </>
   );

@@ -27,7 +27,7 @@ const SplashScreen = ({ onStartGame }: SplashScreenProps) => {
         Start flippingen
       </button>
 
-      <img src="ksd.svg" alt="KS Digital" className="absolute bottom-5 right-5 w-40 h-auto opacity-60" />
+      <img src="ksd.svg" alt="KS Digital logo" className="absolute bottom-5 right-5 w-40 h-auto opacity-60" />
     </div>
   );
 };

@@ -3,6 +3,11 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      colors: {
+        focus: {
+          DEFAULT: "#ffdd00",
+        },
+      },
       backgroundImage: {
         "custom-radial":
           "radial-gradient(circle at 50% -20%, #ffffff22, #0000000f)",

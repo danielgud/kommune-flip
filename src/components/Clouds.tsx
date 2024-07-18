@@ -4,7 +4,7 @@ const Cloud = () => {
 
 export const Clouds = () => {
   return (
-    <div className="animate-cloud">
+    <div className="animate-cloud" aria-hidden="true">
       <div style={{ maxWidth: "30%", animationDelay: "-1s" }}>
         <Cloud />
       </div>
