@@ -5,6 +5,7 @@ import Card from "./Card";
 import Modal from "./Modal";
 import Timer from "./Timer";
 import { Kommune } from "../assets/kommuner";
+import confetti from "canvas-confetti";
 
 type GameProps = {
   numberOfCards: number;
@@ -44,6 +45,11 @@ const Game = ({
       if (cards[firstIndex] === cards[secondIndex]) {
         setMatchedIndices([...matchedIndices, firstIndex, secondIndex]);
         setScore(score + 1);
+        confetti({
+          particleCount: 100,
+          spread: 70,
+          origin: { y: 0.6 },
+        });
         setFlippedIndices([]);
       } else {
         setTimeout(() => setFlippedIndices([]), cardFlipDuration * 2);

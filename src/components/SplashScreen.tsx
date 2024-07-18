@@ -17,12 +17,12 @@ const SplashScreen = ({ onStartGame }: SplashScreenProps) => {
       <h1 className="text-4xl font-bold mb-8 sr-only">Kommune Flip</h1>
       <img
         src="/logo.svg"
-        alt="Logo"
+        alt="Kommuneflip logo"
         className="z-20 w-[600px] mx-auto animate-wiggle p-8 pb-0 pt-56"
       />
       <button
         onClick={onStartGame}
-        className="z-20 bg-blue-900 text-white text-3xl text-bold px-10 py-4 mt-8 rounded-xl hover:scale-110 transition-all shadow-white-500/70 shadow-sm hover:shadow-lg hover:shadow-white-500/70 focus:ring-2 ring-offset-4 ring-offset-yellow-400"
+        className="z-20 bg-blue-900 text-white text-3xl text-bold px-10 py-4 mt-8 rounded-xl hover:scale-110 transition-all shadow-white-500/70 shadow-sm hover:shadow-lg hover:shadow-white-500/70 outline-none focus-visible:ring-4 ring-offset-4 ring-offset-focus"
       >
         Start flippingen
       </button>

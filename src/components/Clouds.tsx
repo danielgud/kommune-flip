@@ -1,5 +1,5 @@
 const Cloud = () => {
-  return <img src="/cloud.png" />;
+  return <img src="/cloud.png" alt="" />;
 };
 
 export const Clouds = () => {

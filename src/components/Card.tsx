@@ -2,6 +2,7 @@ import classNames from "classnames";
 import { createRef, useEffect, useState } from "react";
 import { Kommune } from "../assets/kommuner";
 
+
 interface CardProps {
   index: number;
   kommune: Kommune;
@@ -59,6 +60,7 @@ const Card = ({
     });
   }, [bounds, cardRef, glowRef, isFlipped]);
 
+
   const handleCardClick = () => {
     handleClick(index);
   };
@@ -95,13 +97,18 @@ const Card = ({
             alt=""
             className="w-50 h-auto p-2 mx-auto my-0 backface-hidden"
           />
-          <h2 className="text-2xl font-semibold text-center" aria-hidden={!isFlipped}>{kommune.navn}</h2>
+          <h2
+            className="text-2xl font-semibold text-center"
+            aria-hidden={!isFlipped}
+          >
+            {kommune.navn}
+          </h2>
         </div>
 
         {/* Front of card */}
         <div
           className={classNames(
-            "absolute inset-0 bg-blue-900 backface-hidden flex items-center justify-center rounded-xl border-2 border-solid border-white"
+            "absolute inset-0 bg-blue-600 backface-hidden flex items-center justify-center rounded-xl"
           )}
         >
           <div
@@ -109,7 +116,9 @@ const Card = ({
             className="absolute w-full h-full left-0 top-0 bg-custom-radial"
           ></div>
 
-          <h2 className="sr-only" aria-hidden={isFlipped}>Flipp kortet</h2>
+          <h2 className="sr-only" aria-hidden={isFlipped}>
+            Flipp kort nummer {index + 1}
+          </h2>
 
           <img src="/ks-logo-negative.png" alt="" className="w-20 h-20" />
         </div>
