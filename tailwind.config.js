@@ -51,11 +51,23 @@ export default {
             opacity: "0.4",
           },
         },
+        sheep: {
+          "0%": {
+            transform: "translateX(-22%)",
+          },
+          "50%": {
+            transform: "translateX(70%)",
+          },
+          "100%": {
+            transform: "translateX(-22%)",
+          },
+        },
       },
       animation: {
         wiggle: "wiggle 1.2s ease-in-out infinite",
         ray: "ray 60s linear infinite",
         cloud: "cloud 60s linear infinite",
+        sheep: "sheep 30s ease-in-out infinite",
       },
     },
   },
