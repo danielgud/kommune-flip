@@ -67,6 +67,8 @@ const Card = ({
 
   return (
     <button
+      aria-expanded={isFlipped}
+      aria-atomic={false}
       ref={cardRef}
       className={classNames(
         "relative cursor-pointer select-none duration-[150ms] shadow-card hover:shadow-card-hover transition-transform-shadow rounded-xl overflow-hidden focus-visible:ring-8 ring-focus ring-offset-2 w-full h-full",

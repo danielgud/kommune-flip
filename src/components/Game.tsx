@@ -28,11 +28,16 @@ const Game = ({
   const [score, setScore] = useState(0);
   const [time, setTimeleft] = useState(secondsToCompletion);
   const [isGameFinished, setIsGameFinished] = useState(false);
+  const [liveRegionContent, setLiveRegionContent] = useState("");
 
   useEffect(() => {
     shuffleArray(cards);
     setCards(cards);
   }, [cards]);
+
+  const isCardsEqual = (firstCard: Kommune, secondCard: Kommune) => {
+    return firstCard.image === secondCard.image;
+  }
 
   const handleCardClick = (index: number) => {
     if (flippedIndices.length === 2 || flippedIndices.includes(index)) return;
@@ -42,9 +47,10 @@ const Game = ({
 
     if (newFlippedIndices.length === 2) {
       const [firstIndex, secondIndex] = newFlippedIndices;
-      if (cards[firstIndex] === cards[secondIndex]) {
+      if (isCardsEqual(cards[firstIndex], cards[secondIndex])) {
         setMatchedIndices([...matchedIndices, firstIndex, secondIndex]);
         setScore(score + 1);
+        setLiveRegionContent(`Du fant et et par! ` + cards[firstIndex].navn);
         confetti({
           particleCount: 100,
           spread: 70,
@@ -52,6 +58,7 @@ const Game = ({
         });
         setFlippedIndices([]);
       } else {
+        setLiveRegionContent("Det var ikke et par.");
         setTimeout(() => setFlippedIndices([]), cardFlipDuration * 2);
       }
     }
@@ -78,6 +85,9 @@ const Game = ({
         setTimeleft={setTimeleft}
         handleTimerExpired={handleTimerExpired}
       /> */}
+      <div aria-live="polite" aria-atomic={true} className="sr-only">
+        {liveRegionContent}
+      </div>
       <ul className="grid gap-4 grid-cols-4 w-full h-full p-4 pt-8">
         {cards.map((card, index) => (
           <li key={index}>
