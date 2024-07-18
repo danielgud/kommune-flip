@@ -22,9 +22,9 @@ const SplashScreen = ({ onStartGame }: SplashScreenProps) => {
       />
       <button
         onClick={onStartGame}
-        className="z-20 bg-blue-900 text-white text-3xl text-bold px-10 py-4 mt-8 rounded-xl hover:scale-110 transition-all shadow-white-500/70 shadow-sm hover:shadow-lg hover:shadow-white-500/70 outline-none focus-visible:ring-4 ring-offset-4 ring-offset-focus"
+        className="z-20 bg-blue-900 text-white text-3xl text-bold px-10 py-4 mt-8 rounded-xl hover:scale-110 transition-all shadow-white-500/70 shadow-sm hover:shadow-lg hover:shadow-white-500/70 outline-none focus-visible:ring-4 ring-offset-4 ring-offset-focus select-none"
       >
-        Start flippingen
+        Start flippingen!
       </button>
       <div
         className="absolute bottom-5 left-10 w-40 h-auto animate-sheep group"
@@ -38,7 +38,7 @@ const SplashScreen = ({ onStartGame }: SplashScreenProps) => {
       <img
         src="ksd.svg"
         alt="KS Digital logo"
-        className="absolute bottom-5 right-5 w-40 h-auto opacity-60"
+        className="absolute bottom-5 right-5 w-20 h-auto opacity-60"
       />
     </div>
   );

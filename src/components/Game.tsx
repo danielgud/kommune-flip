@@ -27,7 +27,7 @@ const Game = ({
   const [matchedIndices, setMatchedIndices] = useState<number[]>([]);
   const [score, setScore] = useState(0);
   const [time, setTimeleft] = useState(secondsToCompletion);
-  const [isGameFinished, setIsGameFinished] = useState(false);
+  const [isGameFinished, setIsGameFinished] = useState(true);
   const [liveRegionContent, setLiveRegionContent] = useState("");
 
   useEffect(() => {
