@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { images } from "../assets/images";
+import { kommuner } from "../assets/kommuner";
 import { shuffleArray } from "../utils/utils";
 import Card from "./Card";
 import Modal from "./Modal";
 import Timer from "./Timer";
+import { Kommune } from "../assets/kommuner";
 
 type GameProps = {
   numberOfCards: number;
@@ -12,10 +13,10 @@ type GameProps = {
 };
 
 const Game = ({ numberOfCards, cardFlipDuration, secondsToCompletion }: GameProps) => {
-  const pickedImages = images(numberOfCards / 2);
-  const [cards, setCards] = useState<string[]>([
-    ...pickedImages,
-    ...pickedImages,
+  const pickedKommuner = kommuner(numberOfCards / 2);
+  const [cards, setCards] = useState<Kommune[]>([
+    ...pickedKommuner,
+    ...pickedKommuner,
   ]);
   const [flippedIndices, setFlippedIndices] = useState<number[]>([]);
   const [matchedIndices, setMatchedIndices] = useState<number[]>([]);
@@ -26,6 +27,7 @@ const Game = ({ numberOfCards, cardFlipDuration, secondsToCompletion }: GameProp
   useEffect(() => {
     shuffleArray(cards);
     setCards(cards);
+  
   }, [cards]);
 
   const handleCardClick = (index: number) => {
@@ -72,7 +74,7 @@ const Game = ({ numberOfCards, cardFlipDuration, secondsToCompletion }: GameProp
           <Card
             key={index}
             index={index}
-            image={card}
+            kommune={card}
             isFlipped={
               flippedIndices.includes(index) || matchedIndices.includes(index)
             }

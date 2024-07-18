@@ -1,9 +1,10 @@
 import classNames from "classnames";
 import { createRef, useEffect, useState } from "react";
+import { Kommune } from "../assets/kommuner";
 
 interface CardProps {
   index: number;
-  image: string;
+  kommune: Kommune;
   isFlipped: boolean;
   cardFlipDuration: number;
   handleClick: (index: number) => void;
@@ -11,7 +12,7 @@ interface CardProps {
 
 const Card = ({
   index,
-  image,
+  kommune,
   isFlipped,
   handleClick,
   cardFlipDuration,
@@ -66,7 +67,7 @@ const Card = ({
     <div
       ref={cardRef}
       className={classNames(
-        "relative cursor-pointer select-none duration-[150ms] shadow-card hover:shadow-card-hover transition-transform-shadow rounded-xl",
+        "relative cursor-pointer select-none duration-[150ms] shadow-card hover:shadow-card-hover transition-transform-shadow rounded-xl overflow-hidden",
         {
           "pointer-events-none": isFlipped,
         }
@@ -86,14 +87,15 @@ const Card = ({
         {/* Back of card with kommunelogo */}
         <div
           className={classNames(
-            "absolute w-full h-full flex justify-center content-center bg-white rounded-xl transform rotate-y-180"
+            "absolute w-full h-full flex justify-center content-center bg-white rounded-xl transform rotate-y-180 flex-col"
           )}
         >
           <img
-            src={image}
+            src={kommune.image}
             alt=""
-            className="w-50 h-50 p-10 mx-auto my-0 backface-hidden"
+            className="w-50 h-auto p-2 mx-auto my-0 backface-hidden"
           />
+          <h2 className="text-2xl font-semibold text-center">{kommune.navn}</h2>
         </div>
 
         {/* Front of card */}
