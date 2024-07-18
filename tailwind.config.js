@@ -30,10 +30,24 @@ export default {
           "0%": { transform: "rotate(0deg)" },
           "100%": { transform: "rotate(360deg)" },
         },
+        cloud: {
+          "0%": {
+            transform: "translate(-22%, 10vh)",
+            opacity: "0.8",
+          },
+          "50%": {
+            opacity: "0.8",
+          },
+          "100%": {
+            transform: "translate(122%, 10vh)",
+            opacity: "0.4",
+          },
+        },
       },
       animation: {
         wiggle: "wiggle 1s ease-in-out infinite",
         ray: "ray 60s linear infinite",
+        cloud: "cloud 60s linear infinite"
       },
     },
   },

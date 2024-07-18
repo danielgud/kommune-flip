@@ -4,13 +4,21 @@ const Cloud = () => {
 
 export const Clouds = () => {
   return (
-    <div>
-      <div style={{ animationDelay: "-1s" }}>
+    <div className="animate-cloud">
+      <div style={{ maxWidth: "30%", animationDelay: "-1s" }}>
         <Cloud />
       </div>
-      {/* <div style={{ animationDelay: "-2s" }}>
+      <div
+        style={{
+          animationDelay: "-2s",
+          maxWidth: "30%",
+          marginLeft: "120px",
+          marginTop: "-15px",
+          width: "70%",
+        }}
+      >
         <Cloud />
-      </div> */}
+      </div>
     </div>
   );
 };

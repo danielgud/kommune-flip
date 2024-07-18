@@ -62,11 +62,11 @@ const Game = ({ numberOfCards, cardFlipDuration, secondsToCompletion }: GameProp
 
   return (
     <>
-      <Timer
+      {/* <Timer
         timeLeft={time}
         setTimeleft={setTimeleft}
         handleTimerExpired={handleTimerExpired}
-      />
+      /> */}
       <div className="grid gap-4 grid-cols-4 w-full h-full p-4 pt-8">
         {cards.map((card, index) => (
           <Card

@@ -1,6 +1,6 @@
 export const Sun = () => {
   return (
-    <div className="relative">
+    <div className="relative" aria-hidden="true">
       <div className="absolute inset-0 m-auto w-20 h-20 rounded-full opacity-90 bg-yellow-400 shadow-yellow-400 shadow-lg">
         <div className="absolute inset-0 m-auto w-70 animate-ray ">
           <div
