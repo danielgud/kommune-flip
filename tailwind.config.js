@@ -18,6 +18,9 @@ export default {
         "card-hover": "0 5px 20px 5px #00000044",
         "hard-button": "-4px 4px 0px #ffffff",
       },
+      transform: {
+        "rotate-y-180": "rotateY(180deg)",
+      },
       transitionProperty: {
         "transform-shadow": "transform, box-shadow",
       },
@@ -47,7 +50,7 @@ export default {
       animation: {
         wiggle: "wiggle 1s ease-in-out infinite",
         ray: "ray 60s linear infinite",
-        cloud: "cloud 60s linear infinite"
+        cloud: "cloud 60s linear infinite",
       },
     },
   },

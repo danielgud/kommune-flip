@@ -83,10 +83,10 @@ const Card = ({
           }
         )}
       >
-        {/* Back of card */}
+        {/* Back of card with kommunelogo */}
         <div
           className={classNames(
-            "absolute w-full h-full flex justify-center content-center bg-white rounded-xl"
+            "absolute w-full h-full flex justify-center content-center bg-white rounded-xl transform rotate-y-180"
           )}
         >
           <img
@@ -106,6 +106,7 @@ const Card = ({
             ref={glowRef}
             className="absolute w-full h-full left-0 top-0 bg-custom-radial"
           ></div>
+
           <img
             src="/ks-logo-negative.png"
             alt="ks-logo"
