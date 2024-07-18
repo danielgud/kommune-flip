@@ -48,7 +48,7 @@ export default {
         },
       },
       animation: {
-        wiggle: "wiggle 1s ease-in-out infinite",
+        wiggle: "wiggle 1.2s ease-in-out infinite",
         ray: "ray 60s linear infinite",
         cloud: "cloud 60s linear infinite",
       },
