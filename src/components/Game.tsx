@@ -37,7 +37,20 @@ const Game = ({
 
   const isCardsEqual = (firstCard: Kommune, secondCard: Kommune) => {
     return firstCard.image === secondCard.image;
-  }
+  };
+
+  const handleMatch = (firstIndex: number, secondIndex: number) => {
+    setMatchedIndices([...matchedIndices, firstIndex, secondIndex]);
+    setScore(score + 1);
+    setLiveRegionContent(`Du fant et et par! ` + cards[firstIndex].navn);
+    confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+    setFlippedIndices([]);
+  };
+
+  const handleNonMatch = () => {
+    setLiveRegionContent("Det var ikke et par.");
+    setTimeout(() => setFlippedIndices([]), cardFlipDuration * 2);
+  };
 
   const handleCardClick = (index: number) => {
     if (flippedIndices.length === 2 || flippedIndices.includes(index)) return;
@@ -48,18 +61,9 @@ const Game = ({
     if (newFlippedIndices.length === 2) {
       const [firstIndex, secondIndex] = newFlippedIndices;
       if (isCardsEqual(cards[firstIndex], cards[secondIndex])) {
-        setMatchedIndices([...matchedIndices, firstIndex, secondIndex]);
-        setScore(score + 1);
-        setLiveRegionContent(`Du fant et et par! ` + cards[firstIndex].navn);
-        confetti({
-          particleCount: 100,
-          spread: 70,
-          origin: { y: 0.6 },
-        });
-        setFlippedIndices([]);
+        handleMatch(firstIndex, secondIndex);
       } else {
-        setLiveRegionContent("Det var ikke et par.");
-        setTimeout(() => setFlippedIndices([]), cardFlipDuration * 2);
+        handleNonMatch();
       }
     }
   };
