@@ -1,4 +1,4 @@
-import { createRef, useEffect, useRef } from "react";
+import { createRef, useEffect, useLayoutEffect, useRef } from "react";
 
 interface ModalProps {
   score: number;
@@ -20,16 +20,14 @@ const top10 = [
 
 const Modal = ({ score, time }: ModalProps) => {
   const modalRef = createRef<HTMLDialogElement>();
-  useEffect(() => {
+  useLayoutEffect(() => {
+    modalRef.current?.showModal();
     modalRef?.current?.focus();
   }, [modalRef]);
   return (
     <dialog
       ref={modalRef}
-      open
-      className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center"
-      autoFocus
-      tabIndex={-1}
+      className="fixed z-20 inset-0 rounded-2xl flex items-center justify-center backdrop:bg-blue-900/80 backdrop:backdrop-blur-md"
     >
       <div className="bg-white p-8 rounded-xl shadow-lg w-1/3 min-w-fit text-center">
         <h2 className="text-4xl font-bold mb-4">Bra jobba!</h2>
