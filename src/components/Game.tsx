@@ -1,11 +1,9 @@
+import confetti from "canvas-confetti";
 import { useEffect, useState } from "react";
-import { kommuner } from "../assets/kommuner";
+import { Kommune, kommuner } from "../assets/kommuner";
 import { shuffleArray } from "../utils/utils";
 import Card from "./Card";
 import Modal from "./Modal";
-import Timer from "./Timer";
-import { Kommune } from "../assets/kommuner";
-import confetti from "canvas-confetti";
 
 type GameProps = {
   numberOfCards: number;
@@ -25,8 +23,7 @@ const Game = ({
   ]);
   const [flippedIndices, setFlippedIndices] = useState<number[]>([]);
   const [matchedIndices, setMatchedIndices] = useState<number[]>([]);
-  const [score, setScore] = useState(0);
-  const [time, setTimeleft] = useState(secondsToCompletion);
+  const [time] = useState(secondsToCompletion);
   const [isGameFinished, setIsGameFinished] = useState(true);
   const [liveRegionContent, setLiveRegionContent] = useState("");
 
@@ -41,7 +38,6 @@ const Game = ({
 
   const handleMatch = (firstIndex: number, secondIndex: number) => {
     setMatchedIndices([...matchedIndices, firstIndex, secondIndex]);
-    setScore(score + 1);
     setLiveRegionContent(`Du fant et et par! ` + cards[firstIndex].navn);
     confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
     setFlippedIndices([]);
@@ -68,10 +64,6 @@ const Game = ({
     }
   };
 
-  const handleTimerExpired = () => {
-    setIsGameFinished(true);
-  };
-
   useEffect(() => {
     if (
       matchedIndices.length > 0 &&
@@ -84,11 +76,6 @@ const Game = ({
 
   return (
     <>
-      {/* <Timer
-        timeLeft={time}
-        setTimeleft={setTimeleft}
-        handleTimerExpired={handleTimerExpired}
-      /> */}
       <div aria-live="polite" aria-atomic={true} className="sr-only">
         {liveRegionContent}
       </div>
@@ -107,7 +94,7 @@ const Game = ({
           </li>
         ))}
       </ul>
-      {isGameFinished && <Modal score={score} time={time} />}
+      {isGameFinished && <Modal  time={time} />}
     </>
   );
 };

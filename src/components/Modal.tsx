@@ -1,24 +1,23 @@
-import { createRef, useEffect, useLayoutEffect, useRef } from "react";
+import { createRef, useLayoutEffect } from "react";
 
 interface ModalProps {
-  score: number;
   time: number;
 }
 
 const top10 = [
-  { name: "Ola", score: 10 },
-  { name: "Kari", score: 9 },
-  { name: "Per", score: 8 },
-  { name: "Anne", score: 7 },
-  { name: "Nils", score: 6 },
-  { name: "Mona", score: 5 },
-  { name: "Ole", score: 4 },
-  { name: "Lise", score: 3 },
-  { name: "Knut", score: 2 },
-  { name: "Guri", score: 1 },
+  { name: "Ola", time: 10 },
+  { name: "Kari", time: 9 },
+  { name: "Per", time: 8 },
+  { name: "Anne", time: 7 },
+  { name: "Nils", time: 6 },
+  { name: "Mona", time: 5 },
+  { name: "Ole", time: 4 },
+  { name: "Lise", time: 3 },
+  { name: "Knut", time: 2 },
+  { name: "Guri", time: 1 },
 ];
 
-const Modal = ({ score, time }: ModalProps) => {
+const Modal = ({ time }: ModalProps) => {
   const modalRef = createRef<HTMLDialogElement>();
   useLayoutEffect(() => {
     modalRef.current?.showModal();
@@ -40,7 +39,7 @@ const Modal = ({ score, time }: ModalProps) => {
           {top10.map((entry, index) => (
             <li key={index} className="flex justify-between border-b-2 py-4">
               <span>{entry.name}</span>
-              <span>{entry.score}</span>
+              <span>{entry.time}</span>
             </li>
           ))}
         </ul>
