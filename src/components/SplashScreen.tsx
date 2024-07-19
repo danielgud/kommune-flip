@@ -27,7 +27,7 @@ const SplashScreen = ({ onStartGame }: SplashScreenProps) => {
         Start flippingen!
       </button>
       <div
-        className="absolute bottom-5 left-10 w-40 h-auto animate-sheep group"
+        className="absolute bottom-5 left-10 w-40 h-auto animate-bounce group"
         aria-hidden="true"
       >
         <img src="sheep.svg" />
