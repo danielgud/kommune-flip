@@ -81,7 +81,7 @@ const Card = ({
       <div
         style={{ transformStyle: "preserve-3d" }}
         className={classNames(
-          `absolute inset-0 transition-transform duration-${cardFlipDuration}`,
+          `break-words absolute inset-0 transition-transform duration-${cardFlipDuration}`,
           {
             "transform rotate-y-180": isFlipped,
           }
@@ -100,7 +100,7 @@ const Card = ({
             className="w-50 h-auto p-2 mx-auto my-0 backface-hidden"
           />
           <h2
-            className="text-2xl font-semibold text-center"
+            className="sm:text-2xl font-semibold text-center p-2"
             aria-hidden={!isFlipped}
           >
             {kommune.navn}
@@ -122,7 +122,11 @@ const Card = ({
             Flipp kort nummer {index + 1}
           </h2>
 
-          <img src="/ks-logo-negative.png" alt="" className="w-20 h-20" />
+          <img
+            src="/ks-logo-negative.png"
+            alt=""
+            className="w-10 h-10 sm:w-20 sm:h-20"
+          />
         </div>
       </div>
     </button>

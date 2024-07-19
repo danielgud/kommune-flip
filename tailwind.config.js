@@ -21,7 +21,6 @@ export default {
       boxShadow: {
         card: "0 1px 5px #00000099",
         "card-hover": "0 5px 20px 5px #00000044",
-        "hard-button": "-4px 4px 0px #ffffff",
       },
       transform: {
         "rotate-y-180": "rotateY(180deg)",
