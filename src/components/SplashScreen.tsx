@@ -1,5 +1,5 @@
 import { Clouds } from "./Clouds";
-import { Sun } from "./sun";
+import { Sun } from "./Sun";
 
 interface SplashScreenProps {
   onStartGame: () => void;
