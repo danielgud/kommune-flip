@@ -1,29 +1,11 @@
-import { useEffect } from "react";
-
 interface TimerProps {
-  timeLeft: number;
-  setTimeleft: (time: number) => void;
-  handleTimerExpired: () => void;
+  time: number;
 }
 
-const Timer = ({ timeLeft, setTimeleft, handleTimerExpired }: TimerProps) => {
-  const percentageLeft = (timeLeft / 10) * 100;
-  useEffect(() => {
-    if (timeLeft > 0) {
-      const interval = setInterval(() => setTimeleft(timeLeft - 1), 1000);
-      return () => clearInterval(interval);
-    }
-    if (timeLeft === 0) {
-      handleTimerExpired();
-    }
-  }, [timeLeft, setTimeleft, handleTimerExpired]);
-
+const Timer = ({ time }: TimerProps) => {
   return (
-    <div
-      className="transition-all ease-in-out duration-200 fixed top-0 left-0 flex flex-col justify-center overflow-hidden bg-green-600"
-      style={{ width: `${percentageLeft}%` }}
-    >
-      &nbsp;
+    <div className="text-6xl font-bold text-blue-900 bg-white rounded-xl p-6 shadow-lg min-w-32 text-center">
+      {time}
     </div>
   );
 };

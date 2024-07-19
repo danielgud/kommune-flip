@@ -5,18 +5,14 @@ import { shuffleArray } from "../utils/utils";
 import Card from "./Card";
 import { NamePrompt } from "./NamePrompt";
 import { TopList } from "./TopList";
+import Timer from "./Timer";
 
 type GameProps = {
   numberOfCards: number;
   cardFlipDuration: number;
-  secondsToCompletion: number;
 };
 
-const Game = ({
-  numberOfCards,
-  cardFlipDuration,
-  secondsToCompletion,
-}: GameProps) => {
+const Game = ({ numberOfCards, cardFlipDuration }: GameProps) => {
   const pickedKommuner = kommuner(numberOfCards / 2);
   const [cards, setCards] = useState<Kommune[]>([
     ...pickedKommuner,
@@ -24,9 +20,9 @@ const Game = ({
   ]);
   const [flippedIndices, setFlippedIndices] = useState<number[]>([]);
   const [matchedIndices, setMatchedIndices] = useState<number[]>([]);
-  const [time] = useState(secondsToCompletion);
-  const [isGameFinished, setIsGameFinished] = useState(true);
-  const [liveRegionContent, setLiveRegionContent] = useState("");
+  const [time, setTime] = useState(0);
+  const [isGameFinished, setIsGameFinished] = useState(false);
+  const [annoncePairs, setannoncePairs] = useState("");
   const [playerName, setPlayername] = useState("");
 
   useEffect(() => {
@@ -34,19 +30,26 @@ const Game = ({
     setCards(cards);
   }, [cards]);
 
+  useEffect(() => {
+    if (!isGameFinished) {
+      const interval = setInterval(() => setTime(time + 1), 1000);
+      return () => clearInterval(interval);
+    }
+  }, [time, setTime, isGameFinished]);
+
   const isCardsEqual = (firstCard: Kommune, secondCard: Kommune) => {
     return firstCard.image === secondCard.image;
   };
 
   const handleMatch = (firstIndex: number, secondIndex: number) => {
     setMatchedIndices([...matchedIndices, firstIndex, secondIndex]);
-    setLiveRegionContent(`Du fant et et par! ` + cards[firstIndex].navn);
+    setannoncePairs(`Du fant et et par! ` + cards[firstIndex].navn);
     confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
     setFlippedIndices([]);
   };
 
   const handleNonMatch = () => {
-    setLiveRegionContent("Det var ikke et par.");
+    setannoncePairs("Det var ikke et par.");
     setTimeout(() => setFlippedIndices([]), cardFlipDuration * 2);
   };
 
@@ -68,7 +71,7 @@ const Game = ({
 
   const handleSubmitName = (name: string) => {
     setPlayername(name);
-  }
+  };
 
   useEffect(() => {
     if (
@@ -82,8 +85,11 @@ const Game = ({
 
   return (
     <>
+      <div className="fixed top-0 right-0 z-10">
+        <Timer time={time} />
+      </div>
       <div aria-live="polite" aria-atomic={true} className="sr-only">
-        {liveRegionContent}
+        {annoncePairs}
       </div>
       <ul className="grid gap-4 grid-cols-4 w-full h-full p-4 pt-8">
         {cards.map((card, index) => (
@@ -100,7 +106,12 @@ const Game = ({
           </li>
         ))}
       </ul>
-      {isGameFinished && !playerName && <NamePrompt time={time} onTypedName={(name) => handleSubmitName(name)}/>}
+      {isGameFinished && !playerName && (
+        <NamePrompt
+          time={time}
+          onTypedName={(name) => handleSubmitName(name)}
+        />
+      )}
       {playerName && <TopList name={playerName} time={time} />}
     </>
   );
