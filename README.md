@@ -2,4 +2,6 @@
 
 
 ## Dev
-`> npm run dev`
+```sh
+$ npm run dev
+```
