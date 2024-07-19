@@ -1,3 +1,4 @@
+
 // Shuffle an array using the Fisher-Yates algorithm
 export function shuffleArray<T>(array: T[]) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -8,7 +9,7 @@ export function shuffleArray<T>(array: T[]) {
 }
 
 export function pickRandomItems<T>(array: T[], n: number) {
-    const shuffledArray = shuffleArray(array.slice()); 
-    return shuffledArray.slice(0, n); 
+    const shuffledArray = shuffleArray(array.slice());
+    return shuffledArray.slice(0, n);
 }
 

@@ -1,41 +1,36 @@
 import { Button } from "./Button";
 import Modal from "./Modal";
 
-interface ToplistProps {
+export interface Result {
   time: number;
-  name: string
+  name: string;
 }
 
-const top10 = [
-  { name: "Ola", time: 10 },
-  { name: "Kari", time: 9 },
-  { name: "Per", time: 8 },
-  { name: "Anne", time: 7 },
-  { name: "Nils", time: 6 },
-  { name: "Mona", time: 5 },
-  { name: "Ole", time: 4 },
-  { name: "Lise", time: 3 },
-  { name: "Knut", time: 2 },
-  { name: "Guri", time: 1 },
-];
+interface TopListProps {
+  top10: Result[];
+  currentResult: Result;
+}
 
-export const TopList = ({ time, name }: ToplistProps) => {
+export const TopList = ({ top10, currentResult }: TopListProps) => {
   return (
     <Modal>
-      <h2 className="text-4xl font-bold mb-4">Bra jobbet, {name}</h2>
+      <h2 className="text-4xl font-bold mb-4">
+        Bra jobbet, {currentResult.name}
+      </h2>
       <div>
-        Du brukte <em>noen sekunder</em> sekunder, noe som gir en 5. plass! Her
-        er topp 10:
+        Du brukte <em>{currentResult.time}</em> sekunder. Her er topp 10:
       </div>
 
-      <ul className="text-xl">
+      <ol className="text-xl">
         {top10.map((entry, index) => (
           <li key={index} className="flex justify-between border-b-2 py-4">
-            <span>{entry.name}</span>
-            <span>{entry.time}</span>
+            <span>
+              {index + 1}. {entry.name} {index === 0 && "👑"}
+            </span>
+            <span>{entry.time} sekunder</span>
           </li>
         ))}
-      </ul>
+      </ol>
       <div className="text-center">
         <Button onClick={() => window.location.reload()}>Spill igjen</Button>
       </div>

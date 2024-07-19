@@ -4,8 +4,12 @@ import { Kommune, kommuner } from "../assets/kommuner";
 import { shuffleArray } from "../utils/utils";
 import Card from "./Card";
 import { NamePrompt } from "./NamePrompt";
-import { TopList } from "./TopList";
+import { Result, TopList } from "./TopList";
 import Timer from "./Timer";
+import {
+  readTop10,
+  writeTop10,
+} from "../utils/storage";
 
 type GameProps = {
   numberOfCards: number;
@@ -24,6 +28,7 @@ const Game = ({ numberOfCards, cardFlipDuration }: GameProps) => {
   const [isGameFinished, setIsGameFinished] = useState(false);
   const [annoncePairs, setannoncePairs] = useState("");
   const [playerName, setPlayername] = useState("");
+  const [top10, setTop10] = useState<Result[]>(readTop10());
 
   useEffect(() => {
     shuffleArray(cards);
@@ -69,8 +74,19 @@ const Game = ({ numberOfCards, cardFlipDuration }: GameProps) => {
     }
   };
 
+  const shouldAddToTop10 = (time: number) => {
+    return top10.length < 10 || time < top10[top10.length - 1].time;
+  };
+
   const handleSubmitName = (name: string) => {
     setPlayername(name);
+    if (shouldAddToTop10(time)) {
+      const newTop10 = [...top10, { name, time }].sort(
+        (a, b) => a.time - b.time
+      );
+      setTop10(newTop10);
+      writeTop10(newTop10);
+    }
   };
 
   useEffect(() => {
@@ -112,7 +128,9 @@ const Game = ({ numberOfCards, cardFlipDuration }: GameProps) => {
           onTypedName={(name) => handleSubmitName(name)}
         />
       )}
-      {playerName && <TopList name={playerName} time={time} />}
+      {playerName && (
+        <TopList currentResult={{ name: playerName, time }} top10={top10} />
+      )}
     </>
   );
 };
