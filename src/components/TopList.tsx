@@ -14,9 +14,9 @@ interface TopListProps {
 export const TopList = ({ top10, currentResult }: TopListProps) => {
   return (
     <Modal>
-      <h2 className="text-4xl font-bold mb-4">
+      <h1 className="text-4xl font-bold mb-4">
         Bra jobbet, {currentResult.name}
-      </h2>
+      </h1>
       <div>
         Du brukte <em>{currentResult.time}</em> sekunder. Her er topp 10:
       </div>

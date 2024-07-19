@@ -11,9 +11,9 @@ export const NamePrompt = ({ onTypedName, time }: NamePromptProps) => {
   const [name, setName] = useState("");
   return (
     <Modal>
-      <h2 className="text-4xl font-bold mb-4">
+      <h1 className="text-4xl font-bold mb-4">
         Bra jobbet! Du brukte {time} sekunder
-      </h2>
+      </h1>
       <p className="text-xl pt-2 pb-4">
         Hva heter du? Fornavn eller nickname holder. For ordens skyld lagrer vi
         ingen data.

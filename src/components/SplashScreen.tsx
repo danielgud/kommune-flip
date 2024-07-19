@@ -1,5 +1,7 @@
+import { useState } from "react";
 import { Button } from "./Button";
 import { Clouds } from "./Clouds";
+import { Credits } from "./Credits";
 import { Sun } from "./Sun";
 
 interface SplashScreenProps {
@@ -7,6 +9,7 @@ interface SplashScreenProps {
 }
 
 const SplashScreen = ({ onStartGame }: SplashScreenProps) => {
+  const [showCredits, setShowCredits] = useState(false);
   return (
     <div className="flex flex-col items-center h-full overflow-hidden">
       <div className="mr-auto fixed w-full z-10">
@@ -31,11 +34,16 @@ const SplashScreen = ({ onStartGame }: SplashScreenProps) => {
           Zup
         </p>
       </div>
-      <img
-        src="ksd.svg"
-        alt="KS Digital logo"
-        className="absolute bottom-5 right-5 w-20 h-auto opacity-60"
-      />
+      <div className="absolute bottom-5 right-5 w-20 h-auto ">
+        <button
+          className="underline text-white"
+          onClick={() => setShowCredits(true)}
+        >
+          Credits
+        </button>
+        {showCredits && <Credits />}
+        <img className="opacity-60" src="ksd.svg" alt="KS Digital logo" />
+      </div>
     </div>
   );
 };
