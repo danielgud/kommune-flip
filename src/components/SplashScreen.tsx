@@ -1,3 +1,4 @@
+import { Button } from "./Button";
 import { Clouds } from "./Clouds";
 import { Sun } from "./Sun";
 
@@ -20,12 +21,7 @@ const SplashScreen = ({ onStartGame }: SplashScreenProps) => {
         alt="Kommuneflip logo"
         className="z-20 w-[600px] mx-auto animate-wiggle p-8 pb-0 pt-56"
       />
-      <button
-        onClick={onStartGame}
-        className="z-20 bg-blue-900 text-white text-3xl text-bold px-10 py-4 mt-8 rounded-xl hover:scale-110 transition-all shadow-white-500/70 shadow-sm hover:shadow-lg hover:shadow-white-500/70 outline-none focus-visible:ring-4 ring-offset-4 ring-offset-focus select-none"
-      >
-        Start flippingen!
-      </button>
+      <Button onClick={onStartGame}>Start flippingen!</Button>
       <div
         className="absolute bottom-5 left-10 w-40 h-auto animate-bounce group"
         aria-hidden="true"

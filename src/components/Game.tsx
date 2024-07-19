@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 import { Kommune, kommuner } from "../assets/kommuner";
 import { shuffleArray } from "../utils/utils";
 import Card from "./Card";
-import Modal from "./Modal";
+import { NamePrompt } from "./NamePrompt";
+import { TopList } from "./TopList";
 
 type GameProps = {
   numberOfCards: number;
@@ -26,6 +27,7 @@ const Game = ({
   const [time] = useState(secondsToCompletion);
   const [isGameFinished, setIsGameFinished] = useState(true);
   const [liveRegionContent, setLiveRegionContent] = useState("");
+  const [playerName, setPlayername] = useState("");
 
   useEffect(() => {
     shuffleArray(cards);
@@ -64,6 +66,10 @@ const Game = ({
     }
   };
 
+  const handleSubmitName = (name: string) => {
+    setPlayername(name);
+  }
+
   useEffect(() => {
     if (
       matchedIndices.length > 0 &&
@@ -94,7 +100,8 @@ const Game = ({
           </li>
         ))}
       </ul>
-      {isGameFinished && <Modal  time={time} />}
+      {isGameFinished && !playerName && <NamePrompt time={time} onTypedName={(name) => handleSubmitName(name)}/>}
+      {playerName && <TopList name={playerName} time={time} />}
     </>
   );
 };
