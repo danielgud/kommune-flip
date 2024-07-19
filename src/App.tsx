@@ -10,7 +10,7 @@ const App = () => {
   };
 
   return (
-    <div className="h-screen mx-auto bg-[url('/bg.png')] bg-no-repeat bg-cover">
+    <main className="h-screen mx-auto bg-[url('/bg.png')] bg-no-repeat bg-cover">
       {!gameStarted ? (
         <SplashScreen onStartGame={handleStartGame} />
       ) : (
@@ -20,7 +20,7 @@ const App = () => {
           secondsToCompletion={10}
         />
       )}
-    </div>
+    </main>
   );
 };
 
