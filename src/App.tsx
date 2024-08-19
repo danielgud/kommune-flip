@@ -15,7 +15,7 @@ const App = () => {
         <SplashScreen onStartGame={handleStartGame} />
       ) : (
         <Game
-          numberOfCards={16}
+          numberOfCards={4}
           cardFlipDuration={400}
         />
       )}

@@ -1,6 +1,6 @@
 import confetti from "canvas-confetti";
 import { useEffect, useState } from "react";
-import { Kommune, kommuner } from "../assets/kommuner";
+import { Kommune, randomKommuner } from "../assets/kommuner";
 import { shuffleArray } from "../utils/utils";
 import Card from "./Card";
 import { NamePrompt } from "./NamePrompt";
@@ -17,7 +17,7 @@ type GameProps = {
 };
 
 const Game = ({ numberOfCards, cardFlipDuration }: GameProps) => {
-  const pickedKommuner = kommuner(numberOfCards / 2);
+  const pickedKommuner = randomKommuner(numberOfCards / 2);
   const [cards, setCards] = useState<Kommune[]>([
     ...pickedKommuner,
     ...pickedKommuner,
@@ -83,7 +83,7 @@ const Game = ({ numberOfCards, cardFlipDuration }: GameProps) => {
     if (shouldAddToTop10(time)) {
       const newTop10 = [...top10, { name, time }].sort(
         (a, b) => a.time - b.time
-      );
+      ).slice(0, 10);
       setTop10(newTop10);
       writeTop10(newTop10);
     }
