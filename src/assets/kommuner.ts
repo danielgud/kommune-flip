@@ -20,6 +20,6 @@ export type Kommune = {
     navn: string
 }
 
-export const kommuner = (n: number): Kommune[] => pickRandomItems(washedList, n).map(k => ({ navn: k.navn, image: `https://static.fiks.ks.no/img/kommunevaapen/${k.nr}.png` }))
+export const randomKommuner = (n: number): Kommune[] => pickRandomItems(washedList, n).map(k => ({ navn: k.navn, image: `https://static.fiks.ks.no/img/kommunevaapen/${k.nr}.png` }))
 
 
