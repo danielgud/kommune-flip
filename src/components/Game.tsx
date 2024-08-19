@@ -24,7 +24,8 @@ const Game = ({ numberOfCards, cardFlipDuration }: GameProps) => {
   ]);
   const [flippedIndices, setFlippedIndices] = useState<number[]>([]);
   const [matchedIndices, setMatchedIndices] = useState<number[]>([]);
-  const [time, setTime] = useState(0);
+  const [startTime] = useState(Date.now());
+  const [elapsedTime, setElapsedTime] = useState(0);
   const [isGameFinished, setIsGameFinished] = useState(false);
   const [annoncePairs, setannoncePairs] = useState("");
   const [playerName, setPlayername] = useState("");
@@ -37,10 +38,11 @@ const Game = ({ numberOfCards, cardFlipDuration }: GameProps) => {
 
   useEffect(() => {
     if (!isGameFinished) {
-      const interval = setInterval(() => setTime(time + 1), 1000);
+      const elapsedFixed = +((Date.now() - startTime) / 1000).toFixed(2);
+      const interval = setInterval(() => setElapsedTime(elapsedFixed), 100);
       return () => clearInterval(interval);
     }
-  }, [time, setTime, isGameFinished]);
+  }, [startTime, elapsedTime, setElapsedTime, isGameFinished]);
 
   const isCardsEqual = (firstCard: Kommune, secondCard: Kommune) => {
     return firstCard.image === secondCard.image;
@@ -80,8 +82,8 @@ const Game = ({ numberOfCards, cardFlipDuration }: GameProps) => {
 
   const handleSubmitName = (name: string) => {
     setPlayername(name);
-    if (shouldAddToTop10(time)) {
-      const newTop10 = [...top10, { name, time }].sort(
+    if (shouldAddToTop10(elapsedTime)) {
+      const newTop10 = [...top10, { name, time: elapsedTime }].sort(
         (a, b) => a.time - b.time
       ).slice(0, 10);
       setTop10(newTop10);
@@ -102,7 +104,7 @@ const Game = ({ numberOfCards, cardFlipDuration }: GameProps) => {
   return (
     <>
       <div className="fixed top-0 right-0 z-10">
-        <Timer time={time} />
+        <Timer time={elapsedTime} />
       </div>
       <div aria-live="polite" aria-atomic={true} className="sr-only">
         {annoncePairs}
@@ -124,12 +126,12 @@ const Game = ({ numberOfCards, cardFlipDuration }: GameProps) => {
       </ul>
       {isGameFinished && !playerName && (
         <NamePrompt
-          time={time}
+          time={elapsedTime}
           onTypedName={(name) => handleSubmitName(name)}
         />
       )}
       {playerName && (
-        <TopList currentResult={{ name: playerName, time }} top10={top10} />
+        <TopList currentResult={{ name: playerName, time: elapsedTime }} top10={top10} />
       )}
     </>
   );

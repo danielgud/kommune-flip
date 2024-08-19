@@ -4,7 +4,7 @@ interface TimerProps {
 
 const Timer = ({ time }: TimerProps) => {
   return (
-    <div className="text-lg sm:text-6xl font-bold text-blue-900 bg-white rounded-xl p-6 shadow-lg sm:min-w-32  text-center">
+    <div className="text-lg sm:text-6xl font-bold text-blue-900 bg-white rounded-tl-xl rounded-bl-xl p-6 shadow-lg w-64">
       {time}
     </div>
   );
