@@ -6,10 +6,7 @@ import Card from "./Card";
 import { NamePrompt } from "./NamePrompt";
 import { Result, TopList } from "./TopList";
 import Timer from "./Timer";
-import {
-  readTop10,
-  writeTop10,
-} from "../utils/storage";
+import { readTop10, writeTop10 } from "../utils/storage";
 
 type GameProps = {
   numberOfCards: number;
@@ -27,6 +24,7 @@ const Game = ({ numberOfCards, cardFlipDuration }: GameProps) => {
   const [startTime] = useState(Date.now());
   const [elapsedTime, setElapsedTime] = useState(0);
   const [isGameFinished, setIsGameFinished] = useState(false);
+  const [didMakeItToTop10, setDidMakeItToTop10] = useState(false);
   const [annoncePairs, setannoncePairs] = useState("");
   const [playerName, setPlayername] = useState("");
   const [top10, setTop10] = useState<Result[]>(readTop10());
@@ -76,16 +74,12 @@ const Game = ({ numberOfCards, cardFlipDuration }: GameProps) => {
     }
   };
 
-  const shouldAddToTop10 = (time: number) => {
-    return top10.length < 10 || time < top10[top10.length - 1].time;
-  };
-
   const handleSubmitName = (name: string) => {
     setPlayername(name);
-    if (shouldAddToTop10(elapsedTime)) {
-      const newTop10 = [...top10, { name, time: elapsedTime }].sort(
-        (a, b) => a.time - b.time
-      ).slice(0, 10);
+    if (didMakeItToTop10) {
+      const newTop10 = [...top10, { name, time: elapsedTime }]
+        .sort((a, b) => a.time - b.time)
+        .slice(0, 10);
       setTop10(newTop10);
       writeTop10(newTop10);
     }
@@ -100,6 +94,14 @@ const Game = ({ numberOfCards, cardFlipDuration }: GameProps) => {
       setIsGameFinished(true);
     }
   }, [matchedIndices, cards]);
+
+  useEffect(() => {
+    if (isGameFinished) {
+      setDidMakeItToTop10(
+        top10.length < 10 || elapsedTime < top10[top10.length - 1].time
+      );
+    }
+  }, [isGameFinished, elapsedTime, top10]);
 
   return (
     <>
@@ -124,15 +126,19 @@ const Game = ({ numberOfCards, cardFlipDuration }: GameProps) => {
           </li>
         ))}
       </ul>
-      {isGameFinished && !playerName && (
+      {isGameFinished && !playerName && didMakeItToTop10 && (
         <NamePrompt
           time={elapsedTime}
           onTypedName={(name) => handleSubmitName(name)}
         />
       )}
-      {playerName && (
-        <TopList currentResult={{ name: playerName, time: elapsedTime }} top10={top10} />
-      )}
+      {isGameFinished &&
+        ((didMakeItToTop10 && playerName) || !didMakeItToTop10) && (
+          <TopList
+            currentResult={{ name: playerName, time: elapsedTime }}
+            top10={top10}
+          />
+        )}
     </>
   );
 };

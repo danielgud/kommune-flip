@@ -12,7 +12,7 @@ export const NamePrompt = ({ onTypedName, time }: NamePromptProps) => {
   return (
     <Modal>
       <h1 className="text-4xl font-bold mb-4">
-        Bra jobbet! Du brukte {time} sekunder
+        Bra jobbet! Du brukte {time} sekunder, noe som er blant de 10 beste!
       </h1>
       <p className="text-xl pt-2 pb-4">
         Hva heter du? Fornavn eller nickname holder. For ordens skyld lagrer vi
