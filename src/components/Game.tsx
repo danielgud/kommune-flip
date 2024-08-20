@@ -36,8 +36,10 @@ const Game = ({ numberOfCards, cardFlipDuration }: GameProps) => {
 
   useEffect(() => {
     if (!isGameFinished) {
-      const elapsedFixed = +((Date.now() - startTime) / 1000).toFixed(2);
-      const interval = setInterval(() => setElapsedTime(elapsedFixed), 100);
+      const interval = setInterval(
+        () => setElapsedTime((Date.now() - startTime) / 1000),
+        100
+      );
       return () => clearInterval(interval);
     }
   }, [startTime, elapsedTime, setElapsedTime, isGameFinished]);
