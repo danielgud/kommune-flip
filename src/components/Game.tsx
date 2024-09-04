@@ -57,7 +57,7 @@ const Game = ({ numberOfCards, cardFlipDuration }: GameProps) => {
 
   const handleNonMatch = () => {
     setannoncePairs("Det var ikke et par.");
-    setTimeout(() => setFlippedIndices([]), cardFlipDuration * 2);
+    setTimeout(() => setFlippedIndices([]), cardFlipDuration);
   };
 
   const handleCardClick = (index: number) => {
