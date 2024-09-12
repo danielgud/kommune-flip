@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Game from "./components/Game";
 import SplashScreen from "./components/SplashScreen";
+import { Analytics } from "@vercel/analytics/react";
 
 const App = () => {
   const [gameStarted, setGameStarted] = useState(false);
@@ -14,11 +15,9 @@ const App = () => {
       {!gameStarted ? (
         <SplashScreen onStartGame={handleStartGame} />
       ) : (
-        <Game
-          numberOfCards={16}
-          cardFlipDuration={400}
-        />
+        <Game numberOfCards={16} cardFlipDuration={400} />
       )}
+      <Analytics />
     </main>
   );
 };
