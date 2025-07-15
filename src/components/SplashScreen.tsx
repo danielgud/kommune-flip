@@ -5,11 +5,13 @@ import { Credits } from "./Credits";
 import { Sun } from "./Sun";
 
 interface SplashScreenProps {
-  onStartGame: () => void;
+  onStartGame: (cardCount: number, isTwoPlayer: boolean) => void;
 }
 
 const SplashScreen = ({ onStartGame }: SplashScreenProps) => {
   const [showCredits, setShowCredits] = useState(false);
+  const [isTwoPlayerMode, setIsTwoPlayerMode] = useState<boolean | null>(null);
+
   return (
     <div className="flex flex-col items-center h-full overflow-hidden">
       <div className="mr-auto fixed w-full z-10">
@@ -24,7 +26,31 @@ const SplashScreen = ({ onStartGame }: SplashScreenProps) => {
         alt="Kommuneflip logo"
         className="z-20 w-[600px] mx-auto animate-wiggle p-8 pb-0 pt-56"
       />
-      <Button onClick={onStartGame}>Start flippingen!</Button>
+
+      <div className="flex flex-col items-center gap-4 py-4">
+        {isTwoPlayerMode === null ? (
+          <>
+            <p className="text-white text-xl font-semibold">Velg modus</p>
+            <div className="flex gap-4">
+              <Button onClick={() => setIsTwoPlayerMode(false)}>1 spiller</Button>
+              <Button onClick={() => setIsTwoPlayerMode(true)}>2 spillere</Button>
+            </div>
+          </>
+        ) : (
+          <>
+            <p className="text-white text-xl font-semibold">Velg størrelse på brettet</p>
+            <div className="flex gap-4 flex-wrap justify-center">
+              <Button onClick={() => onStartGame(20, isTwoPlayerMode)}>4 x 5</Button>
+              <Button onClick={() => onStartGame(36, isTwoPlayerMode)}>6 x 6</Button>
+              <Button onClick={() => onStartGame(64, isTwoPlayerMode)}>8 x 8</Button>
+            </div>
+            <div className="mt-4">
+              <Button onClick={() => setIsTwoPlayerMode(null)}>Tilbake</Button>
+            </div>
+          </>
+        )}
+      </div>
+
       <div
         className="absolute bottom-5 left-10 w-40 h-auto animate-bounce group"
         aria-hidden="true"
@@ -34,6 +60,7 @@ const SplashScreen = ({ onStartGame }: SplashScreenProps) => {
           Zup
         </p>
       </div>
+
       <div className="absolute bottom-5 right-5 w-20 h-auto ">
         <button
           className="underline text-white"

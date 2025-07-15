@@ -2,11 +2,11 @@ import { Result } from "../components/TopList";
 
 const key = 'top10'
 
-export function readTop10(): Result[] {
-    const top10 = localStorage.getItem(key);
-    return top10 ? JSON.parse(top10) : [];
-}
-
-export function writeTop10(top10: Result[]) {
-    localStorage.setItem(key, JSON.stringify(top10));
-}
+export const readTop10 = (cardCount: number) => {
+    const raw = localStorage.getItem(`top10_${cardCount}`);
+    return raw ? JSON.parse(raw) : [];
+  };
+  
+  export const writeTop10 = (cardCount: number, data: Result[]) => {
+    localStorage.setItem(`top10_${cardCount}`, JSON.stringify(data));
+  };

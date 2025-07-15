@@ -91,21 +91,23 @@ const Card = ({
         <div
           role="status"
           className={classNames(
-            "absolute w-full h-full flex justify-center content-center bg-white rounded-xl transform rotate-y-180 flex-col"
+           "absolute w-full h-full flex justify-center items-center bg-white rounded-xl transform rotate-y-180 flex-col"
           )}
         >
+        <div className="flex flex-col items-center justify-center h-full px-2 py-4">
           <img
             src={kommune.image}
             alt=""
-            className="w-50 h-auto p-2 mx-auto my-0 backface-hidden"
+            className="max-h-[60%] max-w-[80%] object-contain mb-2 backface-hidden"
           />
           <h2
-            className="sm:text-2xl font-semibold text-center p-2"
+            className="text-center text-sm sm:text-base md:text-lg font-semibold"
             aria-hidden={!isFlipped}
           >
             {kommune.navn}
           </h2>
         </div>
+      </div>
 
         {/* Front of card */}
         <div

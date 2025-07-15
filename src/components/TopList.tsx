@@ -9,14 +9,17 @@ export interface Result {
 interface TopListProps {
   top10: Result[];
   currentResult: Result;
+  numberOfCards: number;
 }
 
-export const TopList = ({ top10, currentResult }: TopListProps) => {
+export const TopList = ({ top10, currentResult, numberOfCards }: TopListProps) => {
   return (
     <Modal>
-      <h1 className="text-4xl font-bold mb-4">
+      <h1 className="text-4xl font-bold mb-2">
         Bra jobbet, {currentResult.name}
       </h1>
+      <p className="mb-4 text-lg">Toppliste for {numberOfCards} kort</p>
+
       <div>
         Du brukte <em>{currentResult.time}</em> sekunder. Her er topp 10:
       </div>
@@ -31,6 +34,7 @@ export const TopList = ({ top10, currentResult }: TopListProps) => {
           </li>
         ))}
       </ol>
+
       <div className="text-center">
         <Button onClick={() => window.location.reload()}>Spill igjen</Button>
       </div>
@@ -38,4 +42,4 @@ export const TopList = ({ top10, currentResult }: TopListProps) => {
   );
 };
 
-export default Modal;
+export default TopList;
