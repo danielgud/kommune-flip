@@ -1,7 +1,5 @@
 import { Result } from "../components/TopList";
 
-const key = 'top10'
-
 export const readTop10 = (cardCount: number) => {
     const raw = localStorage.getItem(`top10_${cardCount}`);
     return raw ? JSON.parse(raw) : [];
